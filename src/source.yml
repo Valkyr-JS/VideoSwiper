@@ -1,12 +1,10 @@
-name: Your Plugin Name
-description: A description of your plugin, shown in the plugin settings page.
-url: https://github.com/Your/Respository
+name: Video Swiper
+description: A Stash plugin for swiping through videos TikTok-style.
+url: https://github.com/Valkyr-JS/VideoSwiper
 version: 0.1.0
 ui:
   javascript:
-    - YourPluginID.js
-  css:
-    - YourPluginID.css
+    - VideoSwiper.js
 settings:
   enablePlugin:
     displayName: Enable the plugin
