@@ -1,4 +1,5 @@
 import type { StorybookConfig } from "@storybook/react-webpack5";
+import path from "path";
 
 const config: StorybookConfig = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
@@ -13,6 +14,33 @@ const config: StorybookConfig = {
   framework: {
     name: "@storybook/react-webpack5",
     options: {},
+  },
+  webpackFinal: async (config, { configType }) => {
+    config.module?.rules?.push({
+      test: /\.s(a|c)ss$/,
+      use: [
+        "style-loader",
+        {
+          loader: "css-loader",
+          options: {
+            modules: {
+              localIdentName: "[name]__[local]__[hash:base64:5]",
+              exportLocalsConvention: "camelCase",
+            },
+            sourceMap: true,
+          },
+        },
+        {
+          loader: "sass-loader",
+          options: {
+            sourceMap: true,
+          },
+        },
+      ],
+      include: path.resolve(__dirname, "../"),
+    });
+
+    return config;
   },
 };
 export default config;

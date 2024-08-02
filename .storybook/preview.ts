@@ -1,6 +1,7 @@
 import type { Preview } from "@storybook/react";
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 import mockPluginAPI from "../mocks/PluginAPI";
+import "./globalStyles.scss";
 
 // Load the mock plugin API.
 window["PluginApi"] = mockPluginAPI;
