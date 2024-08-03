@@ -1,13 +1,17 @@
 const { React } = window.PluginApi;
 const { useEffect, useState, useMemo } = React;
 
-function useIsInViewport(ref: React.MutableRefObject<HTMLElement | null>) {
+function useIsInViewport(
+  ref: React.MutableRefObject<HTMLElement | null>,
+  options?: IntersectionObserverInit
+) {
   const [isIntersecting, setIsIntersecting] = useState(false);
 
   const observer = useMemo(
     () =>
-      new IntersectionObserver(([entry]) =>
-        setIsIntersecting(entry.isIntersecting)
+      new IntersectionObserver(
+        ([entry]) => setIsIntersecting(entry.isIntersecting),
+        options
       ),
     []
   );

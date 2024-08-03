@@ -8,7 +8,9 @@ const VideoItem: React.FC<VideoProps> = (props) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [loadNewVidsAt, setloadNewVidsAt] = useState(props.lastVideoIndex);
 
-  const isInViewport = useIsInViewport(videoRef);
+  const isInViewport = useIsInViewport(videoRef, {
+    threshold: 1,
+  });
 
   useEffect(() => {
     if (isInViewport) {
