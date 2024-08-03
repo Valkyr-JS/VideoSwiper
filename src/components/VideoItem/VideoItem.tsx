@@ -1,5 +1,6 @@
 import * as styles from "./VideoItem.module.scss";
 import { useIsInViewport } from "../../hooks";
+import { FILES_PER_LOAD } from "../../constants";
 const { React } = window.PluginApi;
 const { useEffect, useRef, useState } = React;
 
@@ -11,24 +12,29 @@ const VideoItem: React.FC<VideoProps> = (props) => {
 
   useEffect(() => {
     if (isInViewport) {
-      setTimeout(() => {
-        if (videoRef.current) videoRef.current.play();
-      }, 1000);
+      if (videoRef.current) {
+        videoRef.current.play();
+        console.log("playing " + props.index);
+      }
 
       if (loadNewVidsAt === props.index) {
-        // increase loadNewVidsAt by 2
-        setloadNewVidsAt((prev) => prev + 2);
-        props.getVideos(3);
+        // increase loadNewVidsAt by set amount
+        setloadNewVidsAt((prev) => prev + FILES_PER_LOAD);
+        props.getVideos(FILES_PER_LOAD);
       }
+    } else {
+      videoRef.current?.pause();
+      console.log("paused " + props.index);
     }
   });
 
   const togglePlay = () => {
-    let currentVideo = videoRef.current;
-    if (currentVideo?.paused) {
-      currentVideo.play();
+    if (videoRef.current?.paused) {
+      videoRef.current.play();
+      console.log("playing " + props.index);
     } else {
-      currentVideo?.pause();
+      videoRef.current?.pause();
+      console.log("paused " + props.index);
     }
   };
 
@@ -38,11 +44,22 @@ const VideoItem: React.FC<VideoProps> = (props) => {
   };
 
   useEffect(() => {
-    if (!isInViewport) {
-      videoRef.current?.pause();
-      console.log("left viewport");
-    }
+    if (!isInViewport) videoRef.current?.pause();
   }, [isInViewport]);
+
+  // ? Index reference, for development purposes only
+  const developmentIndexRef = (
+    <span
+      style={{
+        fontSize: "24px",
+        position: "absolute",
+        backgroundColor: "black",
+        padding: "10px",
+      }}
+    >
+      {props.index}
+    </span>
+  );
 
   return (
     <div className={styles["slider-children"]}>
@@ -62,6 +79,7 @@ const VideoItem: React.FC<VideoProps> = (props) => {
       >
         <source src={props.videoURL} type="video/mp4" />
       </video>
+      {developmentIndexRef}
     </div>
   );
 };

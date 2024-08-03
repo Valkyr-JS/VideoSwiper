@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import Scroller from "../components/Scroller/Scroller";
+import { FILES_PER_LOAD } from "../constants";
 
 const { React } = window.PluginApi;
 const { useState } = React;
@@ -17,7 +18,7 @@ const App: React.FC<AppProps> = (props) => {
   };
 
   useEffect(() => {
-    getVideos(3);
+    getVideos(FILES_PER_LOAD);
   }, []);
 
   return (
