@@ -1,6 +1,6 @@
 import * as styles from "./VideoItem.module.scss";
-import { useIsInViewport } from "../../hooks";
-import { FILES_PER_LOAD } from "../../constants";
+import { useIsInViewport } from "@/hooks";
+import { FILES_PER_LOAD } from "@/constants";
 const { React } = window.PluginApi;
 const { useEffect, useRef, useState } = React;
 

@@ -1,4 +1,4 @@
-import VideoItem from "../VideoItem/VideoItem";
+import VideoItem from "@/components/VideoItem/VideoItem";
 import * as styles from "./Scroller.module.scss";
 const { React } = window.PluginApi;
 

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import Scroller from "../components/Scroller/Scroller";
-import { FILES_PER_LOAD } from "../constants";
+import Scroller from "@/components/Scroller/Scroller";
+import { FILES_PER_LOAD } from "@/constants";
 
 const { React } = window.PluginApi;
 const { useState } = React;
